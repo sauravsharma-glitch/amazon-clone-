@@ -1,4 +1,4 @@
-const images = ["amozon hero 1.jpg", "amozon hero 2.jpg", "amozon hero 3.jpg", "amozon hero 4.jpg", "amozon hero 5.jpg", "amozon hero 6.jpg"];
+const images = ["Images/amozon hero 1.jpg", "Images/amozon hero 2.jpg", "Images/amozon hero 3.jpg", "Images/amozon hero 4.jpg", "Images/amozon hero 5.jpg", "Images/amozon hero 6.jpg"];
   let index = 0;
   const heroImg = document.getElementById("hero-img");
 
@@ -85,4 +85,5 @@ function openPopup() {
     function closePopup() {
       document.getElementById('popup').style.display = 'none';
     }
+
 

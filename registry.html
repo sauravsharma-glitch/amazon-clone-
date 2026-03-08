@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazon Registry | Amazon Clone</title>
+  <link rel="icon" type="image/png" href="Amazon_icon.png">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/884d192f43.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* ✅ Fixed Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-logo a {
+      text-decoration: none;
+      display: block;
+    }
+
+    .nav-logo:hover {
+      cursor: pointer;
+    }
+
+    .navbar {
+      height: 60px;
+      background-color: #124444;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+    }
+
+    .panel {
+      height: 40px;
+background-color:#0e4d4d;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      font-size: 0.9rem;
+    }
+
+    /* ✅ Main Content */
+    .content {
+      margin-top: 110px;
+      padding: 30px;
+      background-color: #f4f4f4;
+      min-height: 100vh;
+    }
+
+    /* ✅ Registry Section */
+    .registry-box {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .registry-box h1 {
+      color: #0f2222;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .registry-box p {
+      color: #444;
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    /* ✅ Registry Options Grid */
+    .registry-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .registry-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .registry-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .registry-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .registry-card h3 {
+      margin-top: 15px;
+      font-size: 1.2rem;
+      color: #0f2222;
+    }
+
+    .registry-card p {
+      font-size: 0.95rem;
+      color: #555;
+      padding: 10px 15px 20px 15px;
+    }
+
+    /* ✅ Registry Create Button */
+    .registry-create {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .registry-create button {
+      background-color: #febd69;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .registry-create button:hover {
+      background-color: #f5a623;
+    }
+
+    /* ✅ Popup Overlay */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      animation: popupShow 0.3s ease;
+    }
+
+    @keyframes popupShow {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-content h2 {
+      color: #124444;
+      margin-bottom: 15px;
+    }
+
+    .popup-content input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .popup-content button {
+      background-color: #febd69;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .popup-content button:hover {
+      background-color: #f5a623;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+    }
+    /* ✅ Registry Info Section */
+.registry-info {
+  max-width: 1200px;
+  margin: 70px auto;
+  text-align: left;
+  padding: 20px;
+}
+
+.registry-info h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 25px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.info-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.info-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.info-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 15px 10px 8px 10px;
+  color: #111;
+}
+
+.info-card p {
+  font-size: 0.95rem;
+  color: #333;
+  margin: 0 10px 20px 10px;
+  line-height: 1.4;
+}
+/* ✅ Reasons to Register Section */
+.reasons-register {
+  max-width: 1200px;
+  margin: 70px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.reasons-register h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 40px;
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+.reason-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 30px 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 370px;
+}
+
+.reason-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.reason-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.reason-card h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.reason-card p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.4;
+}
+/* === Layout Fix (Corrected) === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1; /* ensures content grows and pushes footer down */
+  margin-top: 110px;
+  padding: 30px;
+  background-color: #f4f4f4;
+}
+
+/* Footer container — ensures it stays below main content */
+#footer-container {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 Navbar & Panel (Same as amazon clone.html) -->
+  <header>
+    <div class="navbar">
+      <div class="nav-logo border">
+        <a href="amazon clone.html"><div class="logo"></div></a>
+      </div>
+
+      <div class="nav-address border">
+        <p class="add-first">Deliver to</p>
+        <div class="add-icon">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class="add-second">India</p>
+        </div>
+      </div>
+
+      <div class="nav-search">
+        <select class="search-select"><option>All</option></select>
+        <input type="text" placeholder="Search Amazon" class="search-input" />
+        <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+      </div>
+
+      <div class="nav-language border">
+        <img src="https://flagcdn.com/w20/us.png" alt="English" class="lang-flag">
+        <span>EN</span>
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
+
+      <div class="nav-singin border">
+        <p><span><a href="login.html" style="color:white; text-decoration:none;">Hello, sign in</a></span></p>
+        <p class="nav-second">Account & Lists <i class="fa-solid fa-caret-down"></i></p>
+      </div>
+
+      <div class="nav-return border"><p><span>Returns</span></p><p class="nav-second">& Orders</p></div>
+      <div class="nav-cart border"><i class="fa-solid fa-cart-shopping"></i> Cart</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-all border"><i class="fa-solid fa-bars"></i> All</div>
+      <div class="panel-ops">
+        <a href="todays-deals.html">Today's Deals</a>
+        <a href="primevideo.html">Prime Video</a>
+        <a href="registry.html">Registry</a>
+        <a href="giftcard.html">Gift Card</a>
+        <a href="customer-service.html">Customer Service</a>
+        <a href="sell.html">Sell</a>
+      </div>
+      <div class="panel-deals">Shop Deals in Electronics</div>
+    </div>
+  </header>
+
+  <!-- 🔸 Registry Section -->
+  <div class="content">
+    <div class="registry-box">
+      <h1>Create an Amazon Registry</h1>
+      <p>Choose your perfect registry type and share it with friends & family.</p>
+
+      <div class="registry-options">
+        <div class="registry-card">
+          <img src="https://m.media-amazon.com/images/G/01/img18/home/GL/AdobeStock_237143437_crop.jpeg" alt="Baby Registry">
+          <h3>Baby Registry</h3>
+          <p>Plan everything you need for your new arrival.</p>
+        </div>
+
+        <div class="registry-card">
+          <img src="https://m.media-amazon.com/images/G/01/DiscoTec/2024/HomeLifestyle/AWR/Images/SUM24_AWR_Homepage_11_1200x900.jpg" alt="Wedding Registry">
+          <h3>Wedding Registry</h3>
+          <p>Register gifts to celebrate your new journey together.</p>
+        </div>
+
+        <div class="registry-card">
+          <img src="https://m.media-amazon.com/images/G/01/DiscoTec/2024/CategoryFlips/Fall/Gift_List/EN/Browse/WED_REG_2024_30_GL-TL_Gift_List_-_Housewarming_238x238_EN._CB564663344_UC432,432_.jpg" alt="Housewarming Registry">
+          <h3>Housewarming Registry</h3>
+          <p>Get essentials and décor for your new home.</p>
+        </div>
+
+        <div class="registry-card">
+          <img src="https://m.media-amazon.com/images/G/01/DiscoTec/2024/CategoryFlips/Fall/Gift_List/EN/Browse/WED_REG_2024_25_GL-TL_Gift_List_-_Birthday_238x238_EN._CB564663344_UC432,432_.jpg" alt="Birthday Registry">
+          <h3>Birthday Registry</h3>
+          <p>Share your wishlist and let others surprise you!</p>
+        </div>
+        <div class="registry-card">
+          <img src="https://m.media-amazon.com/images/G/01/DiscoTec/2025/Registeries/HOL/RegistriesFall2025Wave1.3__7451_DisplayCustom_HOLGiftList_238_x_238._CB798749852_UC432,432_.png" alt="Birthday Registry">
+          <h3>Holiday</h3>
+          <p>Share your wishlist and let others surprise you!</p>
+        </div>
+        <div class="registry-card">
+          <img src="https://m.media-amazon.com/images/G/01/DiscoTec/2025/BTSOTC/ClassroomList/Teachers_List_25_9242_LP_TopCard_DT._CB791472329_UC432,432_.png" alt="Birthday Registry">
+          <h3>Classroom</h3>
+          <p>Share your wishlist and let others surprise you!</p>
+        </div>
+      </div>
+
+      <div class="registry-create">
+        <button onclick="openPopup()">Create Your Own Registry</button>
+      </div>
+    </div>
+
+    <!-- 🔸 Reasons to Register Section -->
+<section class="reasons-register">
+  <h2>Reasons to register with Amazon</h2>
+  <div class="reasons-grid">
+    
+    <div class="reason-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3202/3202926.png" alt="Earth's biggest selection">
+      <h3>Earth's biggest selection</h3>
+      <p>Add items from Amazon to create a gift registry for any occasion.</p>
+    </div>
+
+    <div class="reason-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1077/1077086.png" alt="Easy to share">
+      <h3>Easy to share</h3>
+      <p>Share your gift registry with friends and family so they’ll know exactly what gifts to get.</p>
+    </div>
+
+    <div class="reason-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/748/748122.png" alt="Extended returns">
+      <h3>Extended returns</h3>
+      <p>Not quite right? Registry gifts have an extended return period.</p>
+    </div>
+
+  </div>
+</section>
+
+   
+    
+  <!-- 🔸 Registry Info Section -->
+<section class="registry-info">
+  <h2>Make your registry unique to you</h2>
+  <div class="info-grid">
+    <div class="info-card">
+      <img src="https://m.media-amazon.com/images/G/01/weddingregistry/images/image-highlights/AWR-GCF.png " alt="Building made easy">
+      <h3>Building made easy</h3>
+      <p>Use our recommendations or add items from product pages.</p>
+    </div>
+
+    <div class="info-card">
+      <img src="https://m.media-amazon.com/images/G/01/weddingregistry/images/image-highlights/AWR-TrackGifts.png" alt="Keep track of everything">
+      <h3>Keep track of everything</h3>
+      <p>We help keep track of who bought what item and when, so it's easy for you to send thank you notes and manage purchases.</p>
+    </div>
+
+    <div class="info-card">
+      <img src="https://m.media-amazon.com/images/G/01/weddingregistry/images/image-highlights/AWR-Personalize.png" alt="Personalize your registry">
+      <h3>Personalize your registry</h3>
+      <p>Add notes and highlight your most wanted gifts to guests.</p>
+    </div>
+
+    <div class="info-card">
+      <img src="https://m.media-amazon.com/images/G/01/DiscoTec/2024/HomeLifestyle/AWR/CategoryBanners/SUM24_AWR_12_CatBanner_GiftRegistry_M_V4.jpg" alt="Easy to shop">
+      <h3>Easy to shop</h3>
+      <p>Shopping an Amazon Registry is a familiar experience for family and friends.</p>
+    </div>
+  </div>
+</section>
+  </div>
+
+  <!-- 🔹 Popup Form -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <span class="close-popup" onclick="closePopup()">&times;</span>
+      <h2>Create Your Registry</h2>
+      <input type="text" placeholder="Enter Registry Name" />
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Email Address" />
+      <button onclick="closePopup()">Create Registry</button>
+    </div>
+  </div>
+  
+<script src="amazon Clone.js"></script>
+</body>
+</html>

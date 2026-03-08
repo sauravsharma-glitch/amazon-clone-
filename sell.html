@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell on Amazon | Amazon.com</title>
+  <link rel="stylesheet" href="style.css">
+   <link rel="icon" type="image/png" href="Amazon_icon.png">
+  <script src="https://kit.fontawesome.com/884d192f43.js" crossorigin="anonymous"></script>
+  <style>
+    /* ✅ Keep existing navbar & panel styling from style.css */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar {
+      height: 60px;
+      background-color: #124444;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+
+    .panel {
+      height: 40px;
+     background-color:#0e4d4d;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      font-size: 0.9rem;
+    }
+
+    /* Add margin below fixed header */
+    .content {
+      margin-top: 110px;
+      padding: 20px;
+    }
+
+    /* 🔸 Sell Page Styling */
+    .sell-container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .sell-container h1 {
+      color: #124444;
+      margin-bottom: 10px;
+    }
+
+    .sell-container p {
+      color: #444;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .sell-btn {
+      background-color: #febd69;
+      color: #111;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .sell-btn:hover {
+      background-color: #f3a847;
+      transform: translateY(-2px);
+    }
+
+    /* Popup Modal */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .popup {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-align: center;
+      animation: popup-anim 0.3s ease;
+    }
+
+    @keyframes popup-anim {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup h2 {
+      color: #124444;
+      margin-bottom: 15px;
+    }
+
+    .popup p {
+      color: #333;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+
+    .popup input, .popup textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .popup button {
+      background-color: #124444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .popup button:hover {
+      background-color: #0e3737;
+    }
+
+    .close-popup {
+      background-color: #ccc;
+      color: black;
+      border: none;
+      padding: 8px 18px;
+      margin-left: 10px;
+    }
+
+    .close-popup:hover {
+      background-color: #bbb;
+    }
+/* ===== SELL SECTION ===== */
+    .sell-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fefdf9;
+      padding: 60px 80px;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .sell-left {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .sell-left h3 {
+      color: #232f3e;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .sell-left h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #0f1111;
+      margin-bottom: 25px;
+    }
+
+    .sell-left p {
+      color: #111;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    .signup-btn {
+      display: inline-block;
+      background-color: #ff9900;
+      color: #111;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 35px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .signup-btn:hover {
+      background-color: #f08804;
+    }
+
+    .sell-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      min-width: 300px;
+    }
+
+    .sell-right img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+    }
+
+    /* Overlay sales card */
+    .sales-card {
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      padding: 20px 25px;
+      text-align: left;
+    }
+
+    .sales-card h4 {
+      font-size: 1.1rem;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .sales-card p {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #111;
+    }
+
+    .sales-card span {
+      color: #1a8917;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .sell-section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .sell-right {
+        order: -1;
+      }
+
+      .sales-card {
+        position: static;
+        display: inline-block;
+        margin-top: 20px;
+      }
+
+      .sell-left h1 {
+        font-size: 2.5rem;
+      }
+    }
+    .incentive-section {
+    background: #fff;
+    padding: 80px 100px;
+    text-align: center;
+  }
+
+  .incentive-header {
+    font-size: 1.6rem;
+    color: #111;
+    margin-bottom: 50px;
+  }
+
+  .incentive-header span {
+    font-weight: 700;
+  }
+
+  .incentive-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    flex-wrap: wrap;
+  }
+
+  /* LEFT SIDE */
+  .incentive-left {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+  }
+
+  .incentive-left img {
+    width: 100%;
+    border-radius: 20px;
+  }
+
+  .incentive-tag {
+    position: absolute;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 600;
+    color: #111;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .incentive-tag.top {
+    top: 15px;
+    left: 15px;
+  }
+
+  .incentive-tag.bottom {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  /* RIGHT SIDE */
+  .incentive-right {
+    flex: 1;
+    min-width: 320px;
+    text-align: left;
+  }
+
+  .new-badge {
+    display: inline-block;
+    background-color: #107f26;
+    color: #fff;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+  }
+
+  .incentive-right h1 {
+    font-size: 2.3rem;
+    color: #111;
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+
+  .incentive-right p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 25px;
+  }
+
+  .incentive-box {
+    background-color: #f2f6e9;
+    border-radius: 15px;
+    padding: 25px 30px;
+    margin-bottom: 20px;
+  }
+
+  .incentive-box ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .incentive-box li {
+    margin: 12px 0;
+    line-height: 1.5;
+    color: #111;
+  }
+
+  .see-more {
+    font-weight: 600;
+    text-decoration: none;
+    color: #111;
+  }
+
+  .see-more:hover {
+    text-decoration: underline;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .incentive-container {
+      flex-direction: column;
+    }
+
+    .incentive-right {
+      text-align: center;
+    }
+
+    .incentive-box {
+      text-align: left;
+    }
+  }
+  </style>
+</head>
+<body>
+
+<body>
+  <!-- ✅ Fixed Navbar and Panel (Same as amazon clone.html) -->
+  <header>
+    <div class="navbar">
+      <div class="nav-logo border">
+        <a href="amazon clone.html"><div class="logo"></div></a>
+      </div>
+
+      <div class="nav-address border">
+        <p class="add-first">Deliver to</p>
+        <div class="add-icon">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class="add-second">India</p>
+        </div>
+      </div>
+
+      <div class="nav-search">
+        <select class="search-select"><option>All</option></select>
+        <input type="text" placeholder="Search Amazon" class="search-input">
+        <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+      </div>
+
+      <div class="nav-language border">
+        <img src="https://flagcdn.com/w20/us.png" alt="English" class="lang-flag">
+        <span>EN</span>
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
+
+      <div class="nav-singin border">
+        <p><span><a href="login.html" style="color: white; text-decoration: none;">Hello, sign in</a></span></p>
+        <p class="nav-second">Account & Lists <i class="fa-solid fa-caret-down"></i></p>
+      </div>
+
+      <div class="nav-return border"><p><span>Return</span></p><p class="nav-second">& Orders</p></div>
+      <div class="nav-cart border"><i class="fa-solid fa-cart-shopping"></i> Cart</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-all border"><i class="fa-solid fa-bars"></i> All</div>
+      <div class="panel-ops">
+        <a href="todays-deals.html">Today's Deals</a>
+        <a href="primevideo.html">Prime Video</a>
+        <a href="registry.html">Registry</a>
+        <a href="giftcard.html">Gift Card</a>
+        <a href="customer-service.html">Customer Service</a>
+        <a href="sell.html">Sell</a>
+      </div>
+      <div class="panel-deals">Shop Deals in Electronics</div>
+    </div>
+  </header>
+
+  <!-- 🔸 Sell Page Content -->
+  <div class="content">
+    <div class="sell-container">
+      <h1>Start Selling on Amazon</h1>
+      <p>Join millions of sellers who grow their business with Amazon. Start your journey today!</p>
+      <button class="sell-btn" onclick="openPopup()">Start Selling</button>
+    </div>
+  </div>
+
+  <!-- 🔹 Sell Popup Modal -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup">
+      <h2>Seller Registration</h2>
+      <p>Fill in your details to get started with your Amazon seller account.</p>
+      <input type="text" placeholder="Your Full Name">
+      <input type="email" placeholder="Email Address">
+      <input type="text" placeholder="Business Name">
+      <textarea rows="3" placeholder="Product Category (e.g., Electronics, Fashion, etc.)"></textarea>
+      <div>
+        <button onclick="submitForm()">Submit</button>
+        <button class="close-popup" onclick="closePopup()">Cancel</button>
+      </div>
+    </div>
+  </div>
+ <!-- ===== SELL WITH AMAZON SECTION ===== -->
+  <section class="sell-section">
+    <div class="sell-left">
+      <h3>Sell with Amazon</h3>
+      <h1>Create an Amazon seller account</h1>
+      <a href="#" class="signup-btn">Sign up*</a>
+      <p>Get <strong>10% back</strong> on your first <strong>$50,000</strong> in branded sales.</p>
+    </div>
+
+    <div class="sell-right">
+      <img src="https://m.media-amazon.com/images/G/01/sell/images/AdobeStock_771026139_1.webp" alt="Seller Image">
+      <div class="sales-card">
+        <h4>Total sales</h4>
+        <p>$136,810 <span>+24%</span></p>
+      </div>
+    </div>
+  </section>
+
+<!-- ===== AMAZON INCENTIVES SECTION ===== -->
+<section class="incentive-section">
+  <h2 class="incentive-header">
+    More than <span>70%</span> of Amazon sellers generate their first sale in less than 60 days<sup>1</sup>
+  </h2>
+
+  <div class="incentive-container">
+    <!-- Left Image -->
+    <div class="incentive-left">
+      <img src="https://m.media-amazon.com/images/G/01/sell/images/seller-864958956.webp" alt="Team Working">
+      <div class="incentive-tag top">$100 off shipments</div>
+      <div class="incentive-tag bottom">10% on your branded sales</div>
+    </div>
+
+    <!-- Right Text -->
+    <div class="incentive-right">
+      <div class="new-badge">🟢 New Seller Incentives</div>
+      <h1>Get started with $50,000 in incentives</h1>
+      <p>
+        Ready to sell with Amazon? As a new seller, you can take advantage of a series of incentives.
+      </p>
+
+      <div class="incentive-box">
+        <ul>
+          <li><strong>10% back</strong> on your first <strong>$50,000</strong> in branded sales, then <strong>5% back</strong> through your first year until you reach $1,000,000</li>
+          <li><strong>$100 off</strong> shipments into the Amazon fulfillment network using the Amazon Partnered Carrier program</li>
+          <li><strong>Free storage and customer returns</strong> with auto-enrollment in the FBA New Selection program</li>
+          <li><strong>$50 credit</strong> to create Sponsored Products or Sponsored Brands ads</li>
+        </ul>
+      </div>
+
+      <a href="#" class="see-more">See all incentives →</a>
+    </div>
+  </div>
+</section>
+
+  <script>
+    // Open popup
+    function openPopup() {
+      document.getElementById('popup').style.display = 'flex';
+    }
+
+    // Close popup
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    // Dummy submit (you can replace with backend logic)
+    function submitForm() {
+      alert("Your seller registration form has been submitted successfully!");
+      closePopup();
+    }
+  </script>
+<!-- Footer will be loaded here -->
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    })
+    .catch(error => console.error("Error loading footer:", error));
+</script>
+
+
+</body>
+</html>

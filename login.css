@@ -1,0 +1,196 @@
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Amazon Ember", Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #f7f7f7, #e3e6e6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Amazon Logo */
+.logo {
+  margin: 40px 0 20px 0;
+  text-align: center;
+}
+
+.logo img {
+  width: 130px;
+}
+
+/* Login Box */
+.login-box {
+  width: 350px;
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 25px;
+  border-radius: 8px;
+
+}
+.login-box:hover {
+  border: 1px solid #a88734;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+.logo img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+
+
+.login-box h2 {
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.login-box label {
+  font-size: 14px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0 16px;
+  border: 1px solid #888;
+  border-radius: 4px;
+  outline: none;
+}
+
+.login-box .btn {
+  width: 100%;
+  background-color: #f0c14b;
+  border: 1px solid #a88734;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.login-box .btn:hover {
+  background-color: #e2b33d;
+}
+
+.privacy {
+  font-size: 12px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.help {
+  margin-top: 10px;
+}
+
+.help a {
+  font-size: 13px;
+  color: #0066c0;
+  text-decoration: none;
+}
+
+.help a:hover {
+  text-decoration: underline;
+}
+
+/* Create Account */
+.create-box {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.create-box p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.create-box button {
+  background-color: #e7e9ec;
+  border: 1px solid #adb1b8;
+  padding: 10px;
+  width: 350px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.create-box button:hover {
+  background-color: #d6d8db;
+}
+
+/* Popup */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.popup-content input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #999;
+}
+
+.popup-content .btn {
+  background-color: #f0c14b;
+  border: 1px solid #a88734;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.popup-content .btn:hover {
+  background-color: #ddb347;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Back Home */
+.back-home {
+  margin-top: 30px;
+}
+
+.back-home a {
+  text-decoration: none;
+  color: #0066c0;
+}
+
+.back-home a:hover {
+  text-decoration: underline;
+}

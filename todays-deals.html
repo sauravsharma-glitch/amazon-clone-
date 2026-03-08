@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Today's Deals | Amazon.com</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="Amazon_icon.png">
+  <script src="https://kit.fontawesome.com/884d192f43.js" crossorigin="anonymous"></script>
+
+ <style>
+ 
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e3e6e6;
+    color: #111;
+    padding-top: 110px; 
+  }
+
+  
+
+  .nav-logo a {
+  text-decoration: none;
+  display: block;
+}
+
+.nav-logo:hover {
+  cursor: pointer;
+}
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: 124444;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    color: white;
+  }
+.deals-right h2{
+  margin-bottom: 20px;
+}
+  .panel {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color:#0e4d4d;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 999;
+  }
+
+  /* 🔹 Container for all deals */
+  .deals-container {
+    padding: 40px 60px;
+    max-width: 1400px;
+  }
+
+  .deals-container h2 {
+    font-size: 26px;
+    text-align: center;
+    background-color: #232f3e;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 25px;
+    margin: 0 auto 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  /* 🔹 Uniform Grid Layout */
+  .deals-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    justify-items: center;
+    align-items: stretch;
+  }
+
+  /* 🔹 Each Box (Card) */
+  .deal-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 280px;
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .deal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* 🔹 Image section */
+  .deal-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    object-position: center;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  /* 🔹 Text info */
+  .deal-info {
+    padding: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .deal-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 6px;
+    line-height: 1.3;
+    height: 38px;
+    overflow: hidden;
+  }
+
+  .deal-price {
+    color: #B12704;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .deal-discount {
+    background-color: #CC0C39;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-left: 8px;
+  }
+
+  .deal-link {
+    display: inline-block;
+    margin-top: 8px;
+    text-decoration: none;
+    color: #007185;
+    font-weight: bold;
+  }
+
+  .deal-link:hover {
+    text-decoration: underline;
+  }
+
+  /* 🎯 Deals Layout */
+  .deals-main {
+    display: flex;
+  }
+
+  /* 🔹 Left Filter Sidebar */
+  .filter-sidebar {
+    position: fixed;
+    top: 170px; /* below navbar + panel */
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 110px);
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+
+  /* 🔹 Sidebar Headings */
+  .filter-sidebar h3 {
+    font-size: 16px;
+    color: #111;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #febd69;
+    padding-bottom: 5px;
+  }
+
+  /* 🔹 Sidebar Text & Lists */
+  .filter-sidebar p {
+    margin: 5px 0 15px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .filter-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px;
+  }
+
+  .filter-sidebar ul li {
+    margin-bottom: 8px;
+  }
+
+  .filter-sidebar a {
+    text-decoration: none;
+    color: #007185;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+
+  .filter-sidebar a:hover {
+    color: #C7511F;
+    text-decoration: underline;
+  }
+
+  /* 🔹 Checkbox Styling */
+  .filter-sidebar input[type="checkbox"] {
+    margin-right: 8px;
+    accent-color: #febd69;
+  }
+
+  /* 🔹 Scrollbar Styling (optional) */
+  .filter-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .filter-sidebar::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+  }
+
+  /* 🔹 Right Content */
+  .deals-right {
+    margin-left: 270px;
+    padding: 40px;
+    margin-top: 60px;
+  }
+
+  /* 🔹 Star color */
+  .filter-sidebar .fa-star {
+    color: #febd69;
+  }
+
+  /* 🔹 Responsive Adjustments */
+  @media (max-width: 900px) {
+    .filter-sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+      box-shadow: none;
+      border-right: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .deals-right {
+      margin-left: 0;
+    }
+
+    body {
+      padding-top: 110px;
+    }
+  }
+  /* 🎯 Today's Deals Header Bar */
+.deals-header {
+  position: fixed;
+  top: 110px; 
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #131921;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 998;
+}
+
+
+body {
+  padding-top: 170px; 
+}
+/* 🔹 Back to Home button styling */
+.deals-header a {
+  background-color: #febd69; /* Amazon yellow */
+  color: #111;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.deals-header a:hover {
+  background-color: #f3a847; /* slightly darker yellow */
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.deals-header a:active {
+  transform: scale(0.98);
+  background-color: #d6963d;
+}
+/* ===== Footer Section (Amazon-style full width) ===== */
+/* Back to Top Button */
+#footer {
+  background-color: #37475A;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+#footer:hover {
+  background-color: #485769;
+}
+
+/* Main Footer Columns */
+#footer-main {
+  background-color: #232F3E;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.footer-column {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.footer-column h4 {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.footer-column a {
+  display: block;
+  color: #dddddd;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 6px 0;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Horizontal line styling */
+#footer-main + hr {
+  border: none;
+  border-top: 1px solid #3a4553;
+}
+
+/* Footer Bottom Panel */
+.foot-panel {
+  background-color: #131A22;
+  color: white;
+  text-align: center;
+  font-size: 0.8rem;
+  padding: 20px 10px;
+  width: 100%;
+}
+
+.pages {
+  margin-bottom: 10px;
+}
+
+.pages a {
+  margin: 0 10px;
+  color: #dddddd;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.pages a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.copyright {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+/* Make sure footer stays full width under sidebar */
+footer {
+  width: 100%;
+  margin-top: 60px;
+  background-color: #232F3E;
+  color: white;
+  position: relative;
+  z-index: 1;
+  clear: both;
+}
+
+/* ✅ Prevent footer from being overlapped by fixed sidebar */
+@media (min-width: 900px) {
+  footer {
+    margin-left: 250px; /* same width as sidebar */
+    width: calc(100% - 250px);
+  }
+}
+
+
+
+
+
+</style>
+
+
+</head>
+
+<body> 
+  <header>
+    <div class="navbar">
+      <!-- Logo Box -->
+     <div class="nav-logo border">
+  <a href="amazon clone.html">
+    <div class="logo"></div>
+  </a>
+</div>
+
+
+      <div class="nav-address border">
+        <p class="add-first">Deliver to</p>
+        <div class="add-icon">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class="add-second">India</p> 
+        </div>
+      </div>
+
+      <div class="nav-search">
+        <select class="search-select">
+          <option>All</option>
+        </select>
+        <input type="text" placeholder="Search Amazon" class="search-input">
+        <div class="search-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+
+      <!-- 🌍 Language Selector -->
+      <div class="nav-language border">
+        <img src="https://flagcdn.com/w20/us.png" alt="English" class="lang-flag">
+        <span>EN</span>
+        <i class="fa-solid fa-caret-down"></i>
+
+        <div class="lang-dropdown">
+          <p><input type="radio" name="language" checked> English - EN</p>
+          <p><input type="radio" name="language"> हिन्दी - HI</p>
+          <p><input type="radio" name="language"> தமிழ் - TA</p>
+          <p><input type="radio" name="language"> বাংলা - BN</p>
+          <p><input type="radio" name="language"> മലയാളം - ML</p>
+          <hr>
+          <a href="#">Learn more about languages</a>
+        </div>
+      </div>
+
+      <!-- Account Menu -->
+      <div class="nav-singin border account-menu">
+        <p><span><a href="login.html" style="color: white; text-decoration: none;">Hello, sign in</a></span></p>
+        <p class="nav-second" id="accountBtn">Account & Lists <i class="fa-solid fa-caret-down"></i></p>
+
+        <div class="dropdown" id="dropdownMenu">
+          <div class="signin">
+            <button class="signin-btn" onclick="window.location.href='login.html'">Sign in</button>
+            <p>New customer? <a href="#">Start here.</a></p>
+          </div>
+          <hr />
+          <div class="menu-content">
+            <div class="column">
+              <h4>Your Lists</h4>
+              <a href="#">Create a List</a>
+              <a href="#">Find a List or Registry</a>
+            </div>
+            <div class="column">
+              <h4>Your Account</h4>
+              <a href="#">Account</a>
+              <a href="#">Orders</a>
+              <a href="#">Recommendations</a>
+              <a href="#">Browsing History</a>
+              <a href="#">Your Shopping preferences</a>
+              <a href="#">Watchlist</a>
+              <a href="#">Video Purchases & Rentals</a>
+              <a href="#">Kindle Unlimited</a>
+              <a href="#">Content & Devices</a>
+              <a href="#">Subscribe & Save Items</a>
+              <a href="#">Memberships & Subscriptions</a>
+              <a href="#">Music Library</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-return border">
+        <p><span>Return</span></p>
+        <p class="nav-second">& Orders</p>
+      </div>
+
+      <div class="nav-cart border">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Cart
+      </div>
+    </div>
+
+    <!-- 🔹 Secondary Navbar -->
+    <div class="panel"> 
+      <div class="panel-all border">
+        <i class="fa-solid fa-bars"></i> All
+        <div class="all-dropdown">
+          <div class="dropdown-header">
+            <i class="fa-solid fa-user"></i> Hello, sign in
+          </div>
+
+          <div class="dropdown-section">
+            <h4>Digital Content & Devices</h4>
+            <a href="#">Prime Video</a>
+            <a href="#">Amazon Music</a>
+            <a href="#">Kindle E-readers & Books</a>
+            <a href="#">Amazon Appstore</a>
+          </div>
+
+          <hr>
+
+          <div class="dropdown-section">
+            <h4>Shop by Department</h4>
+            <a href="#">Electronics</a>
+            <a href="#">Computers</a>
+            <a href="#">Smart Home</a>
+            <a href="#">Arts & Crafts</a>
+            <a href="#">See all ▼</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-ops">
+        <a href="todays-deals.html" target="_blank">Today's Deals</a>
+        <a href="primevideo.html" target="_blank">Prime Video</a>
+        <a href="registry.html" target="_blank">Registry</a>
+        <a href="giftcard.html" target="_blank">Gift Card</a>
+        <a href="customerservice.html" target="_blank">Customer Service</a>
+        <a href="sell.html" target="_blank">Sell</a>
+      </div>
+
+      <div class="panel-deals">Shop Deals in Electronics</div>
+    </div>
+  </header>
+
+  <!-- 🔹 Deals Page Header -->
+  <div class="deals-header">
+    <h1><i class="fa-solid fa-tag"></i> Today's Deals</h1>
+    <a href="Amazon Clone.html">
+  <i class="fa-solid fa-arrow-left"></i> Back to Home
+</a>
+
+  </div>
+
+  <!-- ✅ Corrected Main Layout -->
+  <main>
+    <!-- 🔸 Left Sidebar -->
+    <div class="filter-sidebar">
+      <h3>Customer Reviews</h3>
+      <p>
+  <i class="fa-solid fa-star"></i>
+  <i class="fa-solid fa-star"></i>
+  <i class="fa-solid fa-star"></i>
+  <i class="fa-solid fa-star"></i>
+  <i class="fa-regular fa-star"></i>
+  &nbsp; & Up
+</p>
+
+
+      <h3>Price</h3>
+      <ul>
+        <li><a href="#">Up to $35</a></li>
+        <li><a href="#">$35 to $50</a></li>
+        <li><a href="#">$50 to $80</a></li>
+        <li><a href="#">$80 to $100</a></li>
+        <li><a href="#">$100 & above</a></li>
+      </ul>
+
+      <h3>Deals & Discounts</h3>
+      <ul>
+        <li><a href="#">All Discounts</a></li>
+        <li><a href="#">Today's Deals</a></li>
+      </ul>
+
+      <h3>Brands</h3>
+      <ul>
+        <li><label><input type="checkbox"> JBL</label></li>
+        <li><label><input type="checkbox"> Bose</label></li>
+        <li><label><input type="checkbox"> Sony</label></li>
+        <li><label><input type="checkbox"> Marshall</label></li>
+        <li><label><input type="checkbox"> Harman Kardon</label></li>
+        <li><label><input type="checkbox"> Soundcore</label></li>
+      </ul>
+    </div>
+
+    <!-- 🔸 Right Content Area -->
+    <div class="deals-right">
+      <h2>Top Offers for You</h2>
+      
+      <!-- 🔹 First Grid -->
+      <div class="deals-grid">
+        <div class="deal-card">
+          <img src="headphone.jpg" alt="Headphones">
+          <div class="deal-info">
+            <p class="deal-title">Wireless Headphones</p>
+            <p><span class="deal-price">$59.99</span> <span class="deal-discount">20% off</span></p>
+            <a href="#" class="deal-link">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <img src="smartwatch.webp" alt="Smartwatch">
+          <div class="deal-info">
+            <p class="deal-title">Smartwatch Series 9</p>
+            <p><span class="deal-price">$199.00</span> <span class="deal-discount">35% off</span></p>
+            <a href="#" class="deal-link">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <img src="product18.jpg" alt="Laptop">
+          <div class="deal-info">
+            <p class="deal-title">15-inch Laptop</p>
+            <p><span class="deal-price">$749.99</span> <span class="deal-discount">15% off</span></p>
+            <a href="#" class="deal-link">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <img src="speaker.webp" alt="Speaker">
+          <div class="deal-info">
+            <p class="deal-title">Bluetooth Speaker</p>
+            <p><span class="deal-price">$39.99</span> <span class="deal-discount">30% off</span></p>
+            <a href="#" class="deal-link">Shop Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🔹 Second Grid -->
+      <div class="deals-grid" style="margin-top: 40px;">
+        <div class="deal-card">
+          <img src="box1.jpg" alt="TV">
+          <div class="deal-info">
+            <p class="deal-title">Smart Android TV</p>
+            <p><span class="deal-price">$499.99</span> <span class="deal-discount">20% off</span></p>
+            <a href="#" class="deal-link">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <img src="box9.jpg" alt="Wedding Gifts">
+          <div class="deal-info">
+            <p class="deal-title">Wedding Gifts</p>
+            <p><span class="deal-price">$79.00</span> <span class="deal-discount">35% off</span></p>
+            <a href="#" class="deal-link">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <img src="box8.jpg" alt="Furniture">
+          <div class="deal-info">
+            <p class="deal-title">Furniture</p>
+            <p><span class="deal-price">$749.99</span> <span class="deal-discount">10% off</span></p>
+            <a href="#" class="deal-link">Shop Now</a>
+          </div>
+        </div>
+
+        <div class="deal-card">
+          <img src="box4.jpg" alt="Toys & Games">
+          <div class="deal-info">
+            <p class="deal-title">Toys & Video Games</p>
+            <p><span class="deal-price">$39.99</span> <span class="deal-discount">30% off</span></p>
+            <a href="#" class="deal-link">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Footer Section -->
+<footer>
+
+  <!-- Back to Top -->
+  <div id="footer">Back To Top</div>
+
+  <!-- Main Footer Columns -->
+  <div id="footer-main">
+
+    <div class="footer-column">
+      <h4>Get to Know Us</h4>
+      <a>Careers</a>
+      <a>About Amazon</a>
+      <a>Investor Relations</a>
+      <a>Amazon Devices</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>Make Money with Us</h4>
+      <a>Sell on Amazon</a>
+      <a>Sell Your Services on Amazon</a>
+      <a>Sell on Amazon Business</a>
+      <a>Sell Your Apps on Amazon</a>
+      <a>Become an Affiliate</a>
+      <a>Advertise Your Products</a>
+      <a>Self-Publish with Us</a>
+      <a>› See all</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>Amazon Payment Products</h4>
+      <a>Amazon Rewards Visa Signature Cards</a>
+      <a>Amazon.com Store Card</a>
+      <a>Amazon.com Corporate Credit Line</a>
+      <a>Shop with Points</a>
+      <a>Credit Card Marketplace</a>
+      <a>Reload Your Balance</a>
+      <a>Amazon Currency Converter</a>
+    </div>
+
+    <div class="footer-column">
+      <h4>Let Us Help You</h4>
+      <a>Your Account</a>
+      <a>Your Orders</a>
+      <a>Shipping Rates & Policies</a>
+      <a>Amazon Prime</a>
+      <a>Returns & Replacements</a>
+      <a>Manage Your Content and Devices</a>
+      <a>Amazon Assistant</a>
+      <a>Help</a>
+    </div>
+
+  </div> <!-- end of footer-main -->
+
+  <hr color="white">
+
+  <!-- Footer Bottom Panel -->
+  <div class="foot-panel">
+
+    <div class="pages">
+      <a>Conditions Of Use</a>
+      <a>Privacy Notice</a>
+      <a>Your Ads Privacy Choices</a>
+    </div>
+
+    <div class="copyright">
+      © 1996–2025, Amazon.com, Inc. or its affiliates
+    </div>
+
+  </div> <!-- end of foot-panel -->
+
+</footer>
+<script src="amazon Clone.js">
+
+</script>
+</body>
+
+</html>

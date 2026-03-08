@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Cards | Amazon.com</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Amazon title bar logo  -->
+    <link rel="icon" type="image/png" href="Amazon_icon.png">
+  <script src="https://kit.fontawesome.com/884d192f43.js" crossorigin="anonymous"></script>
+  <style>
+    /* ✅ Keep existing navbar & panel styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar {
+      height: 60px;
+      background-color: #124444;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+
+    .panel {
+      height: 40px;
+background-color:#0e4d4d;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      font-size: 0.9rem;
+    }
+
+    .content {
+      margin-top: 110px;
+      padding: 20px;
+    }
+
+    /* 🎁 Gift Card Section */
+    .giftcard-container {
+      max-width: 1000px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .giftcard-container h1 {
+      color: #124444;
+      margin-bottom: 10px;
+    }
+
+    .giftcard-container p {
+      color: #444;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+    }
+
+    .gift-btn {
+      background-color: #febd69;
+      color: #111;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gift-btn:hover {
+      background-color: #f3a847;
+      transform: translateY(-2px);
+    }
+
+    /* 🎁 Popup Window */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .popup {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 480px;
+      width: 90%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-align: center;
+      animation: popup-anim 0.3s ease;
+    }
+
+    @keyframes popup-anim {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup h2 {
+      color: #124444;
+      margin-bottom: 15px;
+    }
+
+    .popup input, .popup select, .popup textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .popup button {
+      background-color: #124444;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .popup button:hover {
+      background-color: #0e3737;
+    }
+
+    .close-popup {
+      background-color: #ccc;
+      color: black;
+      border: none;
+      padding: 8px 18px;
+      margin-left: 10px;
+    }
+
+    .close-popup:hover {
+      background-color: #bbb;
+    }
+
+    .success-message {
+      color: green;
+      font-weight: bold;
+      display: none;
+      margin-top: 10px;
+    }
+/* 🌟 Gift Card Showcase Styling */
+.gift-showcase {
+  max-width: 1300px;
+  margin: 50px auto;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+}
+
+.gift-showcase h2 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.gift-showcase .shop-all {
+  color: #007185;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.gift-showcase .shop-all:hover {
+  text-decoration: underline;
+}
+
+.gift-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.gift-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  flex: 0 0 240px;
+  text-align: left;
+  padding: 10px;
+  transition: transform 0.2s ease;
+}
+
+.gift-item:hover {
+  transform: translateY(-5px);
+}
+
+.gift-item img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.gift-title {
+  font-size: 0.95rem;
+  color: #111;
+  margin: 5px 0;
+}
+
+.gift-price {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #0f1111;
+}
+/* 🎉 Shop Gift Cards by Occasion */
+.gift-occasion {
+  max-width: 1300px;
+  margin: 40px auto 80px auto;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+}
+
+.gift-occasion h2 {
+  font-size: 1.6rem;
+  color: #111;
+  margin-bottom: 20px;
+}
+
+/* 🟩 Force 4 items in one row */
+.occasion-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: nowrap; /* prevents wrapping to next line */
+  overflow-x: auto; /* allows scroll if screen is small */
+}
+
+.occasion-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  padding-bottom: 15px;
+  transition: transform 0.2s ease;
+  flex: 1; /* evenly distribute space */
+  min-width: 300px; /* each item same width */
+}
+
+.occasion-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+}
+
+.occasion-item:hover {
+  transform: translateY(-5px);
+}
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Fixed Navbar + Panel (Same as amazon clone.html) -->
+  <header>
+    <div class="navbar">
+      <div class="nav-logo border">
+        <a href="amazon clone.html"><div class="logo"></div></a>
+      </div>
+
+      <div class="nav-address border">
+        <p class="add-first">Deliver to</p>
+        <div class="add-icon">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class="add-second">India</p>
+        </div>
+      </div>
+
+      <div class="nav-search">
+        <select class="search-select"><option>All</option></select>
+        <input type="text" placeholder="Search Amazon" class="search-input">
+        <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+      </div>
+
+      <div class="nav-language border">
+        <img src="https://flagcdn.com/w20/us.png" alt="English" class="lang-flag">
+        <span>EN</span>
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
+
+      <div class="nav-singin border">
+        <p><span><a href="login.html" style="color: white; text-decoration: none;">Hello, sign in</a></span></p>
+        <p class="nav-second">Account & Lists <i class="fa-solid fa-caret-down"></i></p>
+      </div>
+
+      <div class="nav-return border"><p><span>Return</span></p><p class="nav-second">& Orders</p></div>
+      <div class="nav-cart border"><i class="fa-solid fa-cart-shopping"></i> Cart</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-all border"><i class="fa-solid fa-bars"></i> All</div>
+      <div class="panel-ops">
+        <a href="todays-deals.html">Today's Deals</a>
+        <a href="primevideo.html">Prime Video</a>
+        <a href="registry.html">Registry</a>
+        <a href="giftcard.html">Gift Card</a>
+        <a href="customer-service.html">Customer Service</a>
+        <a href="sell.html">Sell</a>
+      </div>
+      <div class="panel-deals">Shop Deals in Electronics</div>
+    </div>
+</header>
+
+  <!-- 🎁 Gift Card Section -->
+  <div class="content">
+    <div class="giftcard-container">
+      <h1>Amazon Gift Cards</h1>
+      <p>Send a personalized Amazon Gift Card to your friends and family in seconds!</p>
+      <button class="gift-btn" onclick="openPopup()">Buy a Gift Card</button>
+    </div>
+  </div>
+
+  <!-- 🎁 Popup Modal -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup">
+      <h2>Buy a Gift Card</h2>
+      <input type="text" placeholder="Recipient Name">
+      <input type="email" placeholder="Recipient Email">
+      <select>
+        <option>Select Gift Card Amount</option>
+        <option>₹500</option>
+        <option>₹1000</option>
+        <option>₹2000</option>
+        <option>₹5000</option>
+      </select>
+      <textarea rows="3" placeholder="Add a personal message (optional)"></textarea>
+      <div>
+        <button onclick="submitGift()">Send Gift</button>
+        <button class="close-popup" onclick="closePopup()">Cancel</button>
+      </div>
+      <div class="success-message" id="successMsg">🎉 Gift card successfully sent!</div>
+    </div>
+ </div>
+
+ <!-- 🌟 Gift Card Showcase Section -->
+<section class="gift-showcase">
+  <h2>Give a holiday gift card <a href="#" class="shop-all">Shop all</a></h2>
+
+  <div class="gift-grid">
+    <div class="gift-item">
+      <img src="https://m.media-amazon.com/images/I/41RvCV4pZtL._SR480,440_.jpg" alt="Amazon eGift Card">
+      <p class="gift-title">Amazon eGift Card - Seasonal</p>
+      <p class="gift-price">$50.00</p>
+    </div>
+
+    <div class="gift-item">
+      <img src="https://m.media-amazon.com/images/I/31M+KSv5rTL._SR480,440_.jpg" alt="DoorDash eGift Card">
+      <p class="gift-title">DoorDash eGift Card</p>
+      <p class="gift-price">$25.00</p>
+    </div>
+
+    <div class="gift-item">
+      <img src="https://m.media-amazon.com/images/I/41rWhNPimsL._SR480,440_.jpg" alt="Visa eGift Card">
+      <p class="gift-title">Visa Virtual $100 eGift Card</p>
+      <p class="gift-price">$105.95</p>
+    </div>
+
+    <div class="gift-item">
+      <img src="https://m.media-amazon.com/images/I/31wWKyUY2UL._SR480,440_.jpg" alt="Uber eGift Card">
+      <p class="gift-title">Uber eGift Card</p>
+      <p class="gift-price">$15.00</p>
+    </div>
+  </div>
+</section>
+
+<!-- 🌈 Shop Gift Cards by Occasion -->
+<section class="gift-occasion">
+  <h2>Shop gift cards by occasion</h2>
+
+  <div class="occasion-grid">
+    <div class="occasion-item">
+      <img src="https://m.media-amazon.com/images/G/01/GiftCards/GCLP/2025/PNG/Occasion-Tiles_Desktop_Birthday_EN._CB788667293_.png" alt="Birthday Gift Card">
+      
+    </div>
+
+    <div class="occasion-item">
+      <img src="https://m.media-amazon.com/images/G/01/GiftCards/GCLP/2025/PNG/Occasion-Tiles_Desktop_Appreciation_EN._CB788667293_.png" alt="Appreciation Gift Card">
+      
+    </div>
+
+    <div class="occasion-item">
+      <img src="https://m.media-amazon.com/images/G/01/GiftCards/GCLP/2025/PNG/Occasion-Tiles_Desktop_Celebration_EN._CB788667293_.png" alt="Celebration Gift Card">
+      
+    </div>
+
+    <div class="occasion-item">
+      <img src="https://m.media-amazon.com/images/G/01/GiftCards/GCLP/2025/PNG/Occasion-Tiles_Desktop_Any-Occasion_EN._CB788667293_.png" alt="Any Occasion Gift Card">
+      
+    </div>
+  </div>
+</section>
+
+
+  <script>
+    // Open Popup
+    function openPopup() {
+      document.getElementById('popup').style.display = 'flex';
+    }
+
+    // Close Popup
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'none';
+    }
+
+    // Submit Popup Form
+    function submitGift() {
+      document.getElementById('successMsg').style.display = 'block';
+      setTimeout(() => {
+        alert("Gift Card Sent Successfully!");
+        closePopup();
+      }, 1200);
+    }
+  </script>
+<!-- Footer will be loaded here -->
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    })
+    .catch(error => console.error("Error loading footer:", error));
+</script>
+
+
+</body>
+</html>

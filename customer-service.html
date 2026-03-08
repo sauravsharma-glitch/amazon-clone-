@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="Amazon_icon.png">
+  <title>Customer Service | Amazon.com</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/884d192f43.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* --- Fixed Navbar + Panel --- */
+  
+  body {
+  margin: 0;
+  padding: 0;
+  background-color: #007185;
+}
+    header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* First Navbar */
+.navbar {
+  height: 60px;
+  background-color: #124444;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+
+/* Second Navbar (Panel) */
+.panel {
+  height: 40px;
+ background-color:#0e4d4d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 0.9rem;
+}
+
+    .nav-logo a {
+      text-decoration: none;
+      display: block;
+    }
+
+    .content {
+      margin-top: 110px;
+    }
+
+    /* --- Customer Service Section --- */
+ .cs-hero {
+  background: linear-gradient(to bottom, #007185, #005f68);
+  color: white;
+  text-align: center;
+  padding: 80px 20px 60px; 
+  margin-top: 100px; 
+  font-family: "Amazon Ember", Arial, sans-serif;
+}
+
+.cs-hero h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+}
+
+.cs-hero p {
+  font-size: 18px;
+  margin: 0;
+}
+
+    .cs-grid {
+      background-color: #007185;
+      padding: 10px 20px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cs-container {
+      width: 90%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .cs-card {
+      background-color: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .cs-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .cs-card img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      margin-right: 15px;
+    }
+
+    .cs-card h3 {
+      font-size: 1rem;
+      color: #111;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .cs-hero h1 {
+        font-size: 1.6rem;
+      }
+      .cs-card {
+        flex-direction: column;
+        text-align: center;
+      }
+      .cs-card img {
+        margin: 0 0 10px 0;
+      }
+    }
+/* ✅ THIRD NAVBAR FIXED BELOW SECOND ONE */
+#hub-gateway-app-unauth {
+  position: fixed;
+  top: 100px;  
+  left: 0;
+  width: 100%;
+  background-color: #007185;
+  border-bottom: 1px solid #ddd;
+  font-family: "Amazon Ember", Arial, sans-serif;
+  z-index: 900;
+  transition: all 0.4s ease;
+}
+
+header { height: 100px; } 
+
+.cs-hero { margin-top: 100px; } 
+
+/* Inside the third navbar */
+.nav-header {
+  background-color: #007185;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  height: 45px;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cs-title a {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: white;
+  text-decoration: none;
+  margin-right: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.nav-item a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav-item a:hover {
+  color: #c7511f;
+  text-decoration: underline;
+}
+
+.nav-item.active a {
+  font-weight: 800;
+  color: white;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <!-- Header (Same as amazon clone.html) -->
+  <header>
+    <div class="navbar">
+      <div class="nav-logo border">
+        <a href="amazon clone.html"><div class="logo"></div></a>
+      </div>
+
+      <div class="nav-address border">
+        <p class="add-first">Deliver to</p>
+        <div class="add-icon">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class="add-second">India</p>
+        </div>
+      </div>
+
+      <div class="nav-search">
+        <select class="search-select"><option>All</option></select>
+        <input type="text" placeholder="Search Amazon" class="search-input">
+        <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+      </div>
+
+      <div class="nav-language border">
+        <img src="https://flagcdn.com/w20/us.png" alt="English" class="lang-flag">
+        <span>EN</span>
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
+
+      <div class="nav-singin border">
+        <p><span><a href="login.html" style="color: white; text-decoration: none;">Hello, sign in</a></span></p>
+        <p class="nav-second">Account & Lists <i class="fa-solid fa-caret-down"></i></p>
+      </div>
+
+      <div class="nav-return border"><p><span>Return</span></p><p class="nav-second">& Orders</p></div>
+      <div class="nav-cart border"><i class="fa-solid fa-cart-shopping"></i> Cart</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-all border"><i class="fa-solid fa-bars"></i> All</div>
+      <div class="panel-ops">
+        <a href="todays-deals.html">Today's Deals</a>
+        <a href="primevideo.html">Prime Video</a>
+        <a href="registry.html">Registry</a>
+        <a href="giftcard.html">Gift Card</a>
+        <a href="customer-service.html">Customer Service</a>
+        <a href="sell.html">Sell</a>
+      </div>
+      <div class="panel-deals">Shop Deals in Electronics</div>
+    </div>
+
+</header>
+
+<!-- ✅ THIRD NAVBAR BELOW FIXED HEADER -->
+<div id="hub-gateway-app-unauth">
+  <div class="nav-header">
+    <div class="nav-container">
+      <div class="cs-title">
+        <a href="/hz/contact-us/foresight/hubgateway">Customer Service</a>
+      </div>
+      <nav class="nav-links">
+        <div class="nav-item active">
+          <a href="#">Home</a>
+        </div>
+        <div class="nav-item">
+          <a href="#">Digital Services and Device Support</a>
+        </div>
+        <!-- <div class="nav-item">
+          <a href="#">Your Orders</a>
+        </div>
+        <div class="nav-item">
+          <a href="#">Returns & Refunds</a>
+        </div> -->
+      </nav>
+    </div>
+  </div>
+</div>
+
+  <!-- Customer Service Hero Section -->
+  <section class="cs-hero">
+    <h1>Welcome to Amazon Customer Service</h1>
+    <p>We can help you take care of most things here, sign in to get started.</p>
+  </section>
+
+  <!-- Customer Service Cards -->
+  <section class="cs-grid">
+    <div class="cs-container">
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/Box.png" alt="">
+        <h3>A delivery, order or return</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="Login_Icon_2._.png" alt="">
+        <h3>Help with signing in</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/fshub/fshub_prime_v2._CB432205750_.png" alt="">
+        <h3>Prime</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/Devices.png" alt="">
+        <h3>Kindle, Fire, Alexa, or other Amazon devices</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="ebook.png" alt="">
+        <h3>eBooks, Prime Videos, Music, or Games</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/fshub/fshub_paymentgc_v2._CB432205751_.png" alt="">
+        <h3>Payment, charges or gift cards</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/fshub/fshub_login_security_v2._CB432205751_.png" alt="">
+        <h3>Address, security & privacy</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/fshub/fshub_account_v2._CB432205751_.png" alt="">
+        <h3>Memberships, subscriptions or communications</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/fshub/accessibility._CB653395151_.png" alt="">
+        <h3>Accessibility</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/fshub/fshub_somethingelse_v3._CB428112012_.png" alt="">
+        <h3>Something else</h3>
+      </div>
+
+      <div class="cs-card">
+        <img src="https://m.media-amazon.com/images/G/01/x-locale/cs/help/images/gateway/self-service/fshub/suspicious-emails._CB649253146_.png" alt="">
+        <h3>Report Something Suspicious</h3>
+      </div>
+    </div>
+  </section>
+
+<script src="amazon Clone.js"></script>
+
+<!-- Footer will be loaded here -->
+<div id="footer-container"></div>
+
+<script>
+  fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("footer-container").innerHTML = data;
+    })
+    .catch(error => console.error("Error loading footer:", error));
+</script>
+
+</body>
+
+</html>
